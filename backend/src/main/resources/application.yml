@@ -7,10 +7,10 @@ spring:
   application:
     name: atera-landing-api
   
-  # Database Configuration - MySQL Production
+  # Database Configuration - PostgreSQL Production
   datasource:
-    url: jdbc:mysql://localhost:3306/atera_db?useSSL=false&serverTimezone=Asia/Ho_Chi_Minh&allowPublicKeyRetrieval=true&createDatabaseIfNotExist=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:postgresql://localhost:5432/atera_db
+    driver-class-name: org.postgresql.Driver
     username: atera_user
     password: Atera@2024#Secure
     hikari:
@@ -22,7 +22,7 @@ spring:
   
   # JPA/Hibernate
   jpa:
-    database-platform: org.hibernate.dialect.MySQL8Dialect
+    database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
       ddl-auto: update
     show-sql: true
