@@ -8,13 +8,13 @@ const contactOptions = [
   {
     icon: <HiPhone />,
     label: 'Gọi ngay',
-    href: 'tel:0909888999',
+    href: 'tel:0327312618',
     color: 'bg-green-500',
   },
   {
     icon: <SiZalo />,
     label: 'Zalo',
-    href: 'https://zalo.me/0909888999',
+    href: 'https://zalo.me/0327312618',
     color: 'bg-blue-500',
   },
   {

@@ -9,8 +9,8 @@ const contactInfo = [
   {
     icon: <HiPhone />,
     title: 'Hotline',
-    value: '0909 888 999',
-    href: 'tel:0909888999',
+    value: '0327 312 618',
+    href: 'tel:0327312618',
   },
   {
     icon: <HiMail />,

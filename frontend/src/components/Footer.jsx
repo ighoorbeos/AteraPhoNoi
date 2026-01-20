@@ -26,7 +26,7 @@ const footerLinks = {
 const socialLinks = [
   { icon: <FaFacebookF />, href: 'https://facebook.com', label: 'Facebook' },
   { icon: <FaYoutube />, href: 'https://youtube.com', label: 'YouTube' },
-  { icon: <FaTiktok />, href: 'https://tiktok.com', label: 'TikTok' },
+  { icon: <FaTiktok />, href: 'https://www.tiktok.com/@ringnhibannha_1312', label: 'TikTok' },
   { icon: <FaInstagram />, href: 'https://instagram.com', label: 'Instagram' },
   { icon: <FaCog />, href: '/admin/login', label: 'Admin', isAdmin: true },
 ]

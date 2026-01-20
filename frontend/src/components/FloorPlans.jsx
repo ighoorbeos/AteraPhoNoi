@@ -11,7 +11,7 @@ const floorPlans = [
     area: '80 - 120 m²',
     bedrooms: '3 - 4',
     price: 'Từ 3.5 tỷ',
-    image: '/images/floorplans/floorplan-1.png',
+    image: '/images/overview/shophouse.png',
     features: ['Mặt tiền kinh doanh', '2 mặt thoáng', 'Thiết kế linh hoạt'],
   },
   {
@@ -21,7 +21,7 @@ const floorPlans = [
     area: '200 - 300 m²',
     bedrooms: '4 - 5',
     price: 'Từ 8 tỷ',
-    image: '/images/floorplans/floorplan-2.png',
+    image: '/images/overview/bietthudonlap.png',
     features: ['Sân vườn riêng', 'Hồ bơi mini', 'Garage ô tô'],
   },
   {
@@ -31,7 +31,7 @@ const floorPlans = [
     area: '75 - 90 m²',
     bedrooms: '3',
     price: 'Từ 2.8 tỷ',
-    image: '/images/floorplans/floorplan-3.png',
+    image: '/images/overview/lienke.png',
     features: ['Thiết kế thông minh', 'Không gian tối ưu', 'Giá tốt nhất'],
   },
 ]
@@ -71,7 +71,7 @@ export default function FloorPlans() {
             Đa Dạng <span className="text-accent-gold">Sản Phẩm</span>
           </h2>
           <p className="section-subtitle mt-4">
-            Lựa chọn phong phú từ Shophouse, Biệt thự đến Liền kề 
+            Lựa chọn phong phú từ Shophouse, Liền kề, Chung cư cao cấp 
             phù hợp với mọi nhu cầu và ngân sách.
           </p>
         </motion.div>
@@ -152,10 +152,6 @@ export default function FloorPlans() {
                       </li>
                     ))}
                   </ul>
-
-                  <button className="w-full btn-outline">
-                    Xem chi tiết
-                  </button>
                 </div>
               </motion.div>
             ))}

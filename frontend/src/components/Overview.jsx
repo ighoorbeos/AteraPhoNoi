@@ -3,11 +3,11 @@ import { useInView } from 'react-intersection-observer'
 import { HiCheckCircle } from 'react-icons/hi'
 
 const highlights = [
-  'Vị trí đắc địa - Trung tâm thị trấn Phố Nối',
-  'Thiết kế hiện đại, phong cách châu Âu',
+  'Vị trí đắc địa - Trung tâm Phố Nối - Hưng Yên',
   'Hệ thống tiện ích đẳng cấp 5 sao',
-  'Pháp lý minh bạch, sổ đỏ từng lô',
   'Tiềm năng tăng giá cao',
+  'Thiết kế hiện đại, phong cách Châu Âu',
+  'Pháp lý minh bạch, sổ hồng lâu dài',
   'Cộng đồng cư dân văn minh, đẳng cấp',
 ]
 
@@ -31,17 +31,17 @@ export default function Overview() {
             <div className="grid grid-cols-2 gap-4">
               <img
                 src="/images/overview/overview-1.png"
-                alt="ATERA Phố Nối Overview"
+                alt="ATERA Central Overview"
                 className="rounded-2xl shadow-lg w-full h-64 object-cover"
               />
               <img
-                src="/images/overview/overview-2.png"
-                alt="ATERA Phố Nối View"
+                src="/images/gallery/pic2.jpg"
+                alt="ATERA Central View"
                 className="rounded-2xl shadow-lg w-full h-64 object-cover mt-8"
               />
             </div>
             <div className="absolute -bottom-6 -right-6 bg-accent-gold text-white p-6 rounded-2xl shadow-xl">
-              <div className="text-3xl font-bold">15.2 ha</div>
+              <div className="text-3xl font-bold">4,6 ha</div>
               <div className="text-sm">Tổng diện tích</div>
             </div>
           </motion.div>
@@ -56,15 +56,12 @@ export default function Overview() {
               Tổng quan dự án
             </span>
             <h2 className="section-title mt-2 mb-6">
-              ATERA PHỐ NỐI - <br />
+              ATERA CENTRAL - <br />
               <span className="text-accent-gold">Nơi An Cư Lý Tưởng</span>
             </h2>
             
             <p className="text-gray-600 text-lg mb-8 leading-relaxed">
-              ATERA PHỐ NỐI là khu đô thị sinh thái cao cấp được phát triển bởi những 
-              chủ đầu tư uy tín hàng đầu Việt Nam. Với quy mô 15.2 hecta và mật độ 
-              xây dựng chỉ 35%, dự án mang đến không gian sống xanh mát, hiện đại 
-              và đẳng cấp ngay tại trung tâm thị trấn Phố Nối, Hưng Yên.
+              Atera Central là tổ hợp nhà ở – thương mại – dịch vụ hiện đại tọa lạc tại trung tâm Phố Nối, Hưng Yên, nơi hội tụ hàng chục khu công nghiệp lớn và cộng đồng chuyên gia, lao động chất lượng cao. Dự án được quy hoạch đồng bộ với căn hộ cao tầng, nhà thấp tầng và shophouse, tích hợp hệ tiện ích khép kín, mang đến không gian sống tiện nghi, năng động và tiềm năng gia tăng giá trị bền vững. Atera Central không chỉ là nơi an cư lý tưởng mà còn là điểm đến đầu tư hấp dẫn đón đầu làn sóng phát triển mạnh mẽ của khu vực Phố Nối.
             </p>
 
             <div className="grid sm:grid-cols-2 gap-4 mb-8">
@@ -81,10 +78,6 @@ export default function Overview() {
                 </motion.div>
               ))}
             </div>
-
-            <button className="btn-primary">
-              Tìm hiểu thêm
-            </button>
           </motion.div>
         </div>
       </div>

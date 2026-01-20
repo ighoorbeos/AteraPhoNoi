@@ -10,7 +10,15 @@ import {
 } from 'react-icons/hi'
 import { FaSwimmingPool, FaRunning, FaTree, FaChild } from 'react-icons/fa'
 
+import { MdLocalMovies } from 'react-icons/md'
+
 const amenities = [
+  {
+    icon: <MdLocalMovies />,
+    name: 'Rạp chiếu phim',
+    description: 'Rạp phim cao cấp với âm thanh vòm hiện đại',
+    image: '/images/overview/cinema.png',
+  },
   {
     icon: <FaSwimmingPool />,
     name: 'Hồ bơi 4 mùa',
@@ -52,12 +60,6 @@ const amenities = [
     name: 'An ninh 24/7',
     description: 'Hệ thống camera và bảo vệ thông minh',
     image: '/images/amenities/amenities-7.png',
-  },
-  {
-    icon: <HiHeart />,
-    name: 'Phòng khám',
-    description: 'Dịch vụ y tế nội khu tiện lợi',
-    image: '/images/amenities/amenities-8.png',
   },
 ]
 
@@ -125,10 +127,8 @@ export default function Amenities() {
           initial={{ opacity: 0, y: 30 }}
           animate={inView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.6, delay: 0.8 }}
-          className="text-center mt-12"
+          className="text-center mt-12 hidden"
         >
-          <p className="text-gray-600 mb-4">Khám phá thêm về hệ thống tiện ích</p>
-          <button className="btn-primary">Xem chi tiết</button>
         </motion.div>
       </div>
     </section>

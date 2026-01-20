@@ -6,23 +6,23 @@ import { FaCar, FaSubway, FaPlane } from 'react-icons/fa'
 const locationFeatures = [
   {
     icon: <FaCar />,
-    title: '5 phút',
-    description: 'Đến trung tâm thị trấn Phố Nối',
+    title: '40 phút',
+    description: 'Đến trung tâm TP. Hà Nội',
   },
   {
     icon: <HiOfficeBuilding />,
-    title: '10 phút',
-    description: 'Đến KCN Phố Nối A & B',
+    title: '20-25 phút',
+    description: 'Đến các KĐT Vinhome Ocean Park, Ecopark',
   },
   {
     icon: <FaSubway />,
-    title: '25 phút',
-    description: 'Đến trung tâm TP. Hưng Yên',
+    title: '12 phút',
+    description: 'Đến cầu Mễ Sở',
   },
   {
     icon: <FaPlane />,
-    title: '35 phút',
-    description: 'Đến sân bay Nội Bài',
+    title: '8 phút',
+    description: 'Đến vành đai 4',
   },
 ]
 
@@ -58,8 +58,7 @@ export default function Location() {
             Trung Tâm Kết Nối <span className="text-accent-gold">Vùng Kinh Tế</span>
           </h2>
           <p className="section-subtitle mt-4">
-            Tọa lạc tại vị trí trung tâm thị trấn Phố Nối, kết nối thuận tiện đến 
-            các khu công nghiệp, trung tâm thương mại và các tiện ích công cộng.
+            Tọa lạc tại vị trí trung tâm của Phố Nối, ATERA CENTRAL nằm ở vùng lõi trung chuyển logistic, công nghiệp, kết nối thuận tiện tới các tỉnh lân cận: Hà Nội, Hải Dương, Hải Phòng,... Các khu công nghiệp lân cận, trung tâm thương mại và tiện ích công cộng.
           </p>
         </motion.div>
 
@@ -109,20 +108,13 @@ export default function Location() {
               ))}
             </div>
 
-            {/* Nearby Places */}
-            <div className="bg-accent-gold/10 p-6 rounded-2xl">
-              <h3 className="text-xl font-bold text-dark-900 mb-4 flex items-center gap-2">
-                <HiLocationMarker className="text-accent-gold" />
-                Tiện ích lân cận
-              </h3>
-              <div className="grid grid-cols-2 gap-3">
-                {nearbyPlaces.map((place, index) => (
-                  <div key={index} className="flex items-center gap-2 text-gray-700">
-                    <div className="w-2 h-2 bg-accent-gold rounded-full"></div>
-                    {place}
-                  </div>
-                ))}
-              </div>
+            {/* Location Image */}
+            <div className="rounded-2xl overflow-hidden shadow-lg">
+              <img
+                src="/images/gallery/pic3.jpg"
+                alt="ATERA Central Location"
+                className="w-full h-auto object-cover"
+              />
             </div>
           </motion.div>
         </div>
