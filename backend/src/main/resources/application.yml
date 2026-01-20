@@ -7,13 +7,12 @@ spring:
   application:
     name: atera-landing-api
   
-  # Database Configuration - Neon PostgreSQL (Online)
+  # Database Configuration - Neon PostgreSQL (Cloud)
   datasource:
-    # Set via environment: NEON_JDBC_URL="jdbc:postgresql://<host>:5432/<db>?sslmode=require"
-    url: ${NEON_JDBC_URL}
+    url: jdbc:postgresql://ep-broad-morning-ahbmvxtq-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
     driver-class-name: org.postgresql.Driver
-    username: ${NEON_DB_USER}
-    password: ${NEON_DB_PASSWORD}
+    username: neondb_owner
+    password: npg_2wQVzoqj5rfU
     hikari:
       maximum-pool-size: 10
       minimum-idle: 5

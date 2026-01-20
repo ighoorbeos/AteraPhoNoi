@@ -1,8 +1,19 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext';
 import { publicRoutes, adminRoutes } from './routes';
 import ProtectedRoute from './components/ProtectedRoute';
+import ChatBox from './components/ChatBox';
+
+// Component to conditionally render ChatBox
+function ChatBoxWrapper() {
+  const location = useLocation();
+  // Don't show ChatBox on admin pages
+  if (location.pathname.startsWith('/admin')) {
+    return null;
+  }
+  return <ChatBox />;
+}
 
 function App() {
   return (
@@ -44,6 +55,9 @@ function App() {
           {/* 404 - Not Found */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
+        
+        {/* ChatBox for visitors - only on public pages */}
+        <ChatBoxWrapper />
       </AuthProvider>
     </Router>
   );

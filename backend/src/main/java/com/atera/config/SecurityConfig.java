@@ -55,6 +55,10 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/api/v1/contacts").permitAll()
                 .requestMatchers(HttpMethod.GET, "/api/v1/projects/**").permitAll()
                 
+                // Chat endpoints - visitor routes are public
+                .requestMatchers("/api/chat/visitor/**").permitAll()
+                .requestMatchers("/api/chat/admin/**").hasRole("ADMIN")
+                
                 // H2 Console (development only)
                 .requestMatchers("/h2-console/**").permitAll()
                 

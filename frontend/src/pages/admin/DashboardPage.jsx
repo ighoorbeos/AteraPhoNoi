@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext';
 import { 
   UsersIcon, 
@@ -7,9 +7,10 @@ import {
   CheckCircleIcon,
   ClockIcon,
   ArrowRightOnRectangleIcon,
-  HomeIcon
+  HomeIcon,
+  ChatBubbleLeftRightIcon
 } from '@heroicons/react/24/outline';
-import { contactService } from '../../services';
+import { contactService, chatService } from '../../services';
 
 const DashboardPage = () => {
   const navigate = useNavigate();
@@ -21,12 +22,25 @@ const DashboardPage = () => {
     contacted: 0,
     converted: 0
   });
+  const [unreadChatCount, setUnreadChatCount] = useState(0);
   const [loading, setLoading] = useState(true);
   const [selectedStatus, setSelectedStatus] = useState('');
 
   useEffect(() => {
     loadContacts();
+    loadUnreadChatCount();
   }, []);
+
+  const loadUnreadChatCount = async () => {
+    try {
+      const response = await chatService.getUnreadCount();
+      if (response.data.success) {
+        setUnreadChatCount(response.data.count);
+      }
+    } catch (error) {
+      console.error('Failed to load unread chat count:', error);
+    }
+  };
 
   const loadContacts = async () => {
     try {
@@ -109,6 +123,18 @@ const DashboardPage = () => {
               <span className="text-sm text-gray-700">
                 Xin chào, <span className="font-semibold">{user?.username}</span>
               </span>
+              <Link
+                to="/admin/chat"
+                className="inline-flex items-center px-4 py-2 border border-transparent rounded-lg text-sm font-medium text-white bg-accent-gold hover:bg-amber-600 relative"
+              >
+                <ChatBubbleLeftRightIcon className="h-4 w-4 mr-2" />
+                Chat
+                {unreadChatCount > 0 && (
+                  <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs w-5 h-5 rounded-full flex items-center justify-center">
+                    {unreadChatCount}
+                  </span>
+                )}
+              </Link>
               <a
                 href="/"
                 target="_blank"
