@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../../components/Header';
 import Amenities from '../../components/Amenities';
 import Footer from '../../components/Footer';
-import FloatingContact from '../../components/FloatingContact';
 
 const AmenitiesPage = () => {
   return (
@@ -10,7 +9,6 @@ const AmenitiesPage = () => {
       <Header />
       <Amenities />
       <Footer />
-      <FloatingContact />
     </div>
   );
 };

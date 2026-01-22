@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: ${SERVER_PORT:8080}
   servlet:
     context-path: /
 
@@ -8,14 +8,15 @@ spring:
     name: atera-landing-api
   
   # Database Configuration - Neon PostgreSQL (Cloud)
+  # Use environment variables for production security
   datasource:
-    url: jdbc:postgresql://ep-broad-morning-ahbmvxtq-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require
+    url: ${DATABASE_URL:jdbc:postgresql://ep-broad-morning-ahbmvxtq-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require}
     driver-class-name: org.postgresql.Driver
-    username: neondb_owner
-    password: npg_2wQVzoqj5rfU
+    username: ${DATABASE_USERNAME:neondb_owner}
+    password: ${DATABASE_PASSWORD:npg_2wQVzoqj5rfU}
     hikari:
-      maximum-pool-size: 10
-      minimum-idle: 5
+      maximum-pool-size: ${HIKARI_MAX_POOL:10}
+      minimum-idle: ${HIKARI_MIN_IDLE:5}
       connection-timeout: 20000
       idle-timeout: 300000
       max-lifetime: 1200000
@@ -24,11 +25,11 @@ spring:
   jpa:
     database-platform: org.hibernate.dialect.PostgreSQLDialect
     hibernate:
-      ddl-auto: update
-    show-sql: true
+      ddl-auto: ${JPA_DDL_AUTO:update}
+    show-sql: ${JPA_SHOW_SQL:false}
     properties:
       hibernate:
-        format_sql: true
+        format_sql: false
         jdbc:
           time_zone: Asia/Ho_Chi_Minh
   
@@ -47,40 +48,16 @@ spring:
 
 # JWT Configuration
 jwt:
-  secret: YXRlcmEtcGhvLW5vaS1zZWNyZXQta2V5LTIwMjYtdmVyeS1sb25nLXNlY3JldC1rZXktZm9yLWp3dC1hdXRoZW50aWNhdGlvbg==
-  expiration: 86400000  # 24 hours in milliseconds
+  secret: ${JWT_SECRET:YXRlcmEtcGhvLW5vaS1zZWNyZXQta2V5LTIwMjYtdmVyeS1sb25nLXNlY3JldC1rZXktZm9yLWp3dC1hdXRoZW50aWNhdGlvbg==}
+  expiration: ${JWT_EXPIRATION:86400000}  # 24 hours in milliseconds
 
 # Logging
 logging:
   level:
-    com.atera: DEBUG
+    com.atera: ${LOG_LEVEL_APP:INFO}
     org.springframework.web: INFO
-    org.springframework.security: DEBUG
+    org.springframework.security: ${LOG_LEVEL_SECURITY:WARN}
 
----
-# Production Profile
-spring:
-  config:
-    activate:
-      on-profile: prod
-  
-  datasource:
-    url: jdbc:mysql://${DB_HOST:localhost}:${DB_PORT:3306}/${DB_NAME:atera_db}?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    username: ${DB_USERNAME:root}
-    password: ${DB_PASSWORD:root}
-  
-  jpa:
-    database-platform: org.hibernate.dialect.MySQLDialect
-    hibernate:
-      ddl-auto: update
-    show-sql: false
-  
-  h2:
-    console:
-      enabled: false
-
-logging:
-  level:
-    com.atera: INFO
-    org.springframework.security: WARN
+# CORS Configuration
+cors:
+  allowed-origins: ${CORS_ORIGINS:http://localhost:5173,http://localhost:3000}

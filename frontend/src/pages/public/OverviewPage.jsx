@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../../components/Header';
 import Overview from '../../components/Overview';
 import Footer from '../../components/Footer';
-import FloatingContact from '../../components/FloatingContact';
 
 const OverviewPage = () => {
   return (
@@ -10,7 +9,6 @@ const OverviewPage = () => {
       <Header />
       <Overview />
       <Footer />
-      <FloatingContact />
     </div>
   );
 };

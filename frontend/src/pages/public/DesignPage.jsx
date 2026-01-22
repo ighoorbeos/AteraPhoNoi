@@ -2,7 +2,6 @@ import React from 'react';
 import Header from '../../components/Header';
 import Design from '../../components/Design';
 import Footer from '../../components/Footer';
-import FloatingContact from '../../components/FloatingContact';
 
 const DesignPage = () => {
   return (
@@ -10,7 +9,6 @@ const DesignPage = () => {
       <Header />
       <Design />
       <Footer />
-      <FloatingContact />
     </div>
   );
 };

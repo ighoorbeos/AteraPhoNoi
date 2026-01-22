@@ -1,29 +1,6 @@
 version: '3.8'
 
 services:
-  # MySQL Database
-  mysql:
-    image: mysql:8.0
-    container_name: atera-mysql
-    environment:
-      MYSQL_ROOT_PASSWORD: root123
-      MYSQL_DATABASE: atera_db
-      MYSQL_USER: atera
-      MYSQL_PASSWORD: atera123
-    ports:
-      - "3306:3306"
-    volumes:
-      - mysql_data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
-    healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    restart: unless-stopped
-    networks:
-      - atera-network
-
   # Spring Boot Backend
   backend:
     build:
@@ -33,30 +10,39 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-      - DB_HOST=mysql
-      - DB_PORT=3306
-      - DB_NAME=atera_db
-      - DB_USERNAME=atera
-      - DB_PASSWORD=atera123
-      - JWT_SECRET=atera-pho-noi-secret-key-2026-very-long-secret-key-for-jwt-authentication-production
-    depends_on:
-      mysql:
-        condition: service_healthy
+      - SERVER_PORT=8080
+      - DATABASE_URL=${DATABASE_URL:-jdbc:postgresql://ep-broad-morning-ahbmvxtq-pooler.c-3.us-east-1.aws.neon.tech/neondb?sslmode=require}
+      - DATABASE_USERNAME=${DATABASE_USERNAME:-neondb_owner}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD:-npg_2wQVzoqj5rfU}
+      - JWT_SECRET=${JWT_SECRET:-YXRlcmEtcGhvLW5vaS1zZWNyZXQta2V5LTIwMjYtdmVyeS1sb25nLXNlY3JldC1rZXktZm9yLWp3dC1hdXRoZW50aWNhdGlvbg==}
+      - JPA_DDL_AUTO=update
+      - JPA_SHOW_SQL=false
+      - LOG_LEVEL_APP=INFO
+      - LOG_LEVEL_SECURITY=WARN
+      - CORS_ORIGINS=${CORS_ORIGINS:-http://localhost,http://localhost:80}
     restart: unless-stopped
     networks:
       - atera-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/actuator/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
 
   # React Frontend (Nginx)
   frontend:
     build:
       context: ./frontend
       dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=${VITE_API_URL:-/api/v1}
     container_name: atera-frontend
     ports:
       - "80:80"
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
     restart: unless-stopped
     networks:
       - atera-network
@@ -65,5 +51,3 @@ networks:
   atera-network:
     driver: bridge
 
-volumes:
-  mysql_data:

@@ -9,7 +9,6 @@ import Amenities from '../../components/Amenities';
 import Gallery from '../../components/Gallery';
 import Contact from '../../components/Contact';
 import Footer from '../../components/Footer';
-import FloatingContact from '../../components/FloatingContact';
 
 const HomePage = () => {
   return (
@@ -24,7 +23,6 @@ const HomePage = () => {
       <Gallery />
       <Contact />
       <Footer />
-      <FloatingContact />
     </div>
   );
 };
