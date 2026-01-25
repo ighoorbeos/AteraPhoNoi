@@ -31,39 +31,84 @@ mvn spring-boot:run
 ### 1. Mua VPS
 Khuyến nghị: **Ubuntu 22.04**, tối thiểu 4GB RAM
 
-### 2. SSH vào VPS và chạy script
+### 2. SSH vào VPS và chạy script deploy
 ```bash
 # Clone repository
-git clone https://github.com/ighoorbeos/AteraPhoNoi.git /opt/atera-landing-page
-cd /opt/atera-landing-page
+git clone https://github.com/ighoorbeos/AteraPhoNoi.git
+cd AteraPhoNoi/atera-landing-page
 
-# Chạy script deploy
-chmod +x deploy.sh
+# Make scripts executable
+chmod +x *.sh
+
+# Run main deployment
 sudo ./deploy.sh
 ```
 
-### 3. Cấu hình domain
-Thêm A record trỏ domain đến IP VPS.
+Script sẽ tự động:
+- ✅ Update hệ thống
+- ✅ Cài Docker & Docker Compose
+- ✅ Cài Nginx
+- ✅ Cấu hình Firewall (UFW)
+- ✅ Cài Certbot (cho SSL)
+- ✅ Clone/update code
+- ✅ Build và start containers
+
+### 3. Cấu hình Domain (Optional)
+```bash
+# Thêm A record: your-domain.com → VPS IP
+
+# Chạy script setup domain
+sudo ./setup-domain.sh your-domain.com
+
+# Cài SSL certificate
+sudo certbot --nginx -d your-domain.com -d www.your-domain.com
+```
+
+### 4. Setup Monitoring (Optional)
+```bash
+sudo ./setup-monitoring.sh
+```
+
+Monitoring tools:
+- 🐳 **Portainer**: Docker GUI tại `https://your-ip:9443`
+- ⚡ **Quick commands**: `atera-logs`, `atera-status`, `atera-restart`, `atera-update`
 
 ##  Environment Variables
 
-| Variable | Description |
-|----------|-------------|
-| DATABASE_URL | PostgreSQL connection string |
-| DATABASE_USERNAME | Database username |
-| DATABASE_PASSWORD | Database password |
-| JWT_SECRET | JWT signing key |
-| CORS_ORIGINS | Allowed origins |
+Tạo file `.env` từ `.env.example`:
+
+| Variable | Description | Example |
+|----------|-------------|---------|
+| DATABASE_URL | PostgreSQL connection string | jdbc:postgresql://host/db?sslmode=require |
+| DATABASE_USERNAME | Database username | neondb_owner |
+| DATABASE_PASSWORD | Database password | npg_xxx |
+| JWT_SECRET | JWT signing key | openssl rand -base64 64 |
+| MAIL_HOST | SMTP host | smtp.gmail.com hoặc smtp-relay.brevo.com |
+| MAIL_PORT | SMTP port | 587 |
+| MAIL_USERNAME | Email account | your-email@gmail.com |
+| MAIL_PASSWORD | App Password/SMTP Key | xxxx xxxx xxxx xxxx |
+| ADMIN_EMAIL | Admin email nhận thông báo | admin@atera.com |
+| CORS_ORIGINS | Allowed origins | http://your-domain.com,https://your-domain.com |
 
 ##  Features
 
 -  Responsive design
 -  Real-time chat với Admin
--  Contact form
+-  Contact form với email notification
 -  Image gallery
 -  Admin dashboard
 -  Cloud database (Neon PostgreSQL)
--  Docker ready
+-  Email notifications (admin + customer)
+-  Docker deployment
+-  One-click setup scripts
+
+##  Scripts
+
+| Script | Mục đích |
+|--------|----------|
+| `deploy.sh` | Deploy chính (Docker + Nginx + Firewall) |
+| `setup-domain.sh` | Cấu hình domain và Nginx reverse proxy |
+| `setup-monitoring.sh` | Cài Portainer và monitoring tools |
 
 ##  Admin Access
 
