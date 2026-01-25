@@ -185,7 +185,7 @@ export default function Contact() {
                 >
                   <option value="">Sản phẩm quan tâm</option>
                   <option value="shophouse">Shophouse</option>
-                  <option value="villa">Biệt thự đơn lập</option>
+                  <option value="apartment">Chung cư cao cấp</option>
                   <option value="townhouse">Liền kề</option>
                   <option value="all">Tất cả sản phẩm</option>
                 </select>

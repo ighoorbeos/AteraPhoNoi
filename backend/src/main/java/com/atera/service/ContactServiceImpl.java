@@ -26,6 +26,7 @@ public class ContactServiceImpl {
     
     private final ContactRepository contactRepository;
     private final UserRepository userRepository;
+    private final EmailService emailService;
     
     @Transactional
     public ContactResponse createContact(ContactRequest request, String ipAddress, String userAgent) {
@@ -50,7 +51,14 @@ public class ContactServiceImpl {
         Contact saved = contactRepository.save(contact);
         log.info("New contact created: {} - {}", saved.getId(), saved.getEmail());
         
-        // TODO: Send notification email to sales team
+        // Send notification emails asynchronously
+        try {
+            emailService.sendNewContactNotification(saved);
+            emailService.sendThankYouEmail(saved);
+        } catch (Exception e) {
+            log.error("Failed to send email notifications", e);
+            // Don't fail the contact creation if email fails
+        }
         
         return ContactResponse.fromEntity(saved);
     }

@@ -98,15 +98,10 @@ public class DataInitializer implements CommandLineRunner {
                     .build(),
             ProductType.builder()
                     .project(project)
-                    .name("Biệt thự đơn lập")
-                    .areaMin(200.0)
-                    .areaMax(300.0)
-                    .bedroomsMin(4)
-                    .bedroomsMax(5)
-                    .startPrice(new BigDecimal("8000000000"))
+                    .name("Chung cư cao cấp")
                     .imageUrl("/images/floorplans/floorplan-2.png")
                     .features(objectMapper.writeValueAsString(Arrays.asList(
-                            "Sân vườn riêng", "Hồ bơi mini", "Garage ô tô")))
+                            "View đẹp", "Tiện ích đầy đủ", "An ninh 24/7")))
                     .sortOrder(2)
                     .isActive(true)
                     .build(),

@@ -16,13 +16,10 @@ const floorPlans = [
   },
   {
     id: 2,
-    type: 'villa',
-    name: 'Biệt thự đơn lập',
-    area: '200 - 300 m²',
-    bedrooms: '4 - 5',
-    price: 'Từ 8 tỷ',
+    type: 'apartment',
+    name: 'Chung cư cao cấp',
     image: '/images/overview/bietthudonlap.png',
-    features: ['Sân vườn riêng', 'Hồ bơi mini', 'Garage ô tô'],
+    features: ['View đẹp', 'Tiện ích đầy đủ', 'An ninh 24/7'],
   },
   {
     id: 3,
@@ -39,7 +36,7 @@ const floorPlans = [
 const tabs = [
   { id: 'all', label: 'Tất cả' },
   { id: 'shophouse', label: 'Shophouse' },
-  { id: 'villa', label: 'Biệt thự' },
+  { id: 'apartment', label: 'Chung cư' },
   { id: 'townhouse', label: 'Liền kề' },
 ]
 
@@ -126,24 +123,6 @@ export default function FloorPlans() {
                 <div className="p-6">
                   <h3 className="text-2xl font-bold text-dark-900 mb-4">{plan.name}</h3>
                   
-                  <div className="grid grid-cols-3 gap-4 mb-6">
-                    <div className="text-center p-3 bg-gray-50 rounded-lg">
-                      <HiOutlineScale className="text-accent-gold text-xl mx-auto mb-1" />
-                      <div className="text-xs text-gray-500">Diện tích</div>
-                      <div className="font-semibold text-sm">{plan.area}</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-50 rounded-lg">
-                      <HiOutlineHome className="text-accent-gold text-xl mx-auto mb-1" />
-                      <div className="text-xs text-gray-500">Phòng ngủ</div>
-                      <div className="font-semibold text-sm">{plan.bedrooms}</div>
-                    </div>
-                    <div className="text-center p-3 bg-gray-50 rounded-lg">
-                      <HiOutlineCurrencyDollar className="text-accent-gold text-xl mx-auto mb-1" />
-                      <div className="text-xs text-gray-500">Giá từ</div>
-                      <div className="font-semibold text-sm">{plan.price}</div>
-                    </div>
-                  </div>
-
                   <ul className="space-y-2 mb-6">
                     {plan.features.map((feature, idx) => (
                       <li key={idx} className="flex items-center gap-2 text-gray-600">

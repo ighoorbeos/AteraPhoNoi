@@ -33,18 +33,26 @@ spring:
         jdbc:
           time_zone: Asia/Ho_Chi_Minh
   
-  # Email configuration (uncomment and configure for production)
-  # mail:
-  #   host: smtp.gmail.com
-  #   port: 587
-  #   username: your-email@gmail.com
-  #   password: your-app-password
-  #   properties:
-  #     mail:
-  #       smtp:
-  #         auth: true
-  #         starttls:
-  #           enable: true
+  # Email configuration (use environment variables for production)
+  mail:
+    host: ${MAIL_HOST:smtp.gmail.com}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+
+# Application Configuration
+app:
+  admin:
+    email: ${ADMIN_EMAIL:admin@atera.com}
 
 # JWT Configuration
 jwt:
