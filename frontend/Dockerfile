@@ -11,11 +11,18 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-# Production stage
-FROM nginx:alpine
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Production stage - Simple static file server
+FROM node:20-alpine
+WORKDIR /app
 
-EXPOSE 80
+# Copy built files
+COPY --from=build /app/dist ./dist
 
-CMD ["nginx", "-g", "daemon off;"]
+# Install serve for simple static file serving
+RUN npm install -g serve
+
+# Expose port
+EXPOSE 3000
+
+# Serve the built files
+CMD ["serve", "-s", "dist", "-l", "3000"]

@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  # .NET 8 Backend
+  backend-net:
+    build:
+      context: ./backend_net
+      dockerfile: Dockerfile
+    container_name: atera-backend-net
+    ports:
+      - "8081:8080"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+      - ASPNETCORE_URLS=http://+:8080
+      - ConnectionStrings__DefaultConnection=Server=mysql;Database=atera_db;User=root;Password=yourpassword;
+      - Jwt__Key=YXRlcmEtcGhvLW5vaS1zZWNyZXQta2V5LTIwMjYtdmVyeS1sb25nLXNlY3JldC1rZXktZm9yLWp3dC1hdXRoZW50aWNhdGlvbg==
+      - Jwt__Issuer=AteraApi
+      - Jwt__Audience=AteraApi
+    depends_on:
+      mysql:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - atera-network
+    healthcheck:
+      test: ["CMD", "wget", "--quiet", "--tries=1", "--spider", "http://localhost:8080/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: atera-mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: yourpassword
+      MYSQL_DATABASE: atera_db
+      MYSQL_USER: atera_user
+      MYSQL_PASSWORD: atera_password
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./backend_net/init.sql:/docker-entrypoint-initdb.d/init.sql
+    restart: unless-stopped
+    networks:
+      - atera-network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:
+
+networks:
+  atera-network:
+    driver: bridge
