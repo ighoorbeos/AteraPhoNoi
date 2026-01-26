@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import { useForm } from 'react-hook-form'
 import { HiPhone, HiMail, HiLocationMarker, HiClock } from 'react-icons/hi'
-import { contactService } from '../services/api'
+import emailjs from '@emailjs/browser'
 
 const contactInfo = [
   {
@@ -46,15 +46,42 @@ export default function Contact() {
   const onSubmit = async (data) => {
     setIsSubmitting(true)
     try {
-      const response = await contactService.submitContact(data)
-      if (response.data.success) {
+      // EmailJS configuration from environment variables
+      const serviceId = import.meta.env.VITE_EMAILJS_SERVICE_ID
+      const templateId = import.meta.env.VITE_EMAILJS_TEMPLATE_ID
+      const publicKey = import.meta.env.VITE_EMAILJS_PUBLIC_KEY
+
+      // Prepare email template parameters
+      const templateParams = {
+        from_name: data.fullName,
+        from_email: data.email || 'No email provided',
+        phone: data.phone,
+        name: data.fullName,
+        project: data.interestedProduct || 'Not specified product interest',
+        email: data.email || 'No email provided',
+        interested_product: data.interestedProduct || 'Not specified product interest',
+        message: data.message|| 'No message',
+        to_email: 'ateraphonoi@gmail.com', 
+        time: new Date().toLocaleString('vi-VN', { timeZone: 'Asia/Ho_Chi_Minh' }),
+        subject: `New Contact Form Submission - ${data.fullName}`
+      }
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        serviceId,
+        templateId,
+        templateParams,
+        publicKey
+      )
+
+      if (result.status === 200) {
         setSubmitStatus('success')
         reset()
       } else {
         setSubmitStatus('error')
       }
     } catch (error) {
-      console.error('Submit error:', error)
+      console.error('EmailJS error:', error)
       setSubmitStatus('error')
     }
     setIsSubmitting(false)
